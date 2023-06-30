@@ -1,9 +1,8 @@
 from django.urls import reverse
-from news.models import News, Comment
+from news.models import Comment
 from django.conf import settings
 from datetime import timedelta
 from django.utils import timezone
-import pytest
 
 
 def test_news_count_on_page(author_client, all_news):
@@ -11,6 +10,7 @@ def test_news_count_on_page(author_client, all_news):
     object_list = response.context['object_list']
     news_count = len(object_list)
     assert news_count == settings.NEWS_COUNT_ON_HOME_PAGE
+
 
 def test_news_order(author_client, all_news):
     response = author_client.get(reverse('news:home'))

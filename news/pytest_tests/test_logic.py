@@ -61,11 +61,9 @@ def test_author_can_edit_comment(author_client, news, comment, edit_comment):
     assert new_post.text == edit_comment['text']
 
 
-def test_user_cant_edit_comment_of_another_user(admin_client, news, comment, edit_comment):
+def test_user_cant_edit_comment_of_another_user(
+        admin_client, news, comment, edit_comment
+):
     url = reverse('news:edit', args=(news.id,))
     response = admin_client.post(url, data=edit_comment)
     assert response.status_code == HTTPStatus.NOT_FOUND
-
-
-
-
